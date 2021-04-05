@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %} ATS articles {% endblock %}
+{% block styles %}{% static 'css/articles.css' %}{% endblock %}
+
+{% block main %}
+
+<h1>Все статьи</h1>
+
+<div class="articles">
+    {% for article in articles %}
+        <div class="card">
+            <h5 class="card-header">{{ article.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{ article.text }}</h5>
+                <p class="card-text">{{ article.autor }}</p>
+                <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+    
+
+{% endblock %}

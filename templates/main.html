@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %} ATS news {% endblock %}
+{% block styles %}{% static 'css/main.css' %}{% endblock %}
+
+{% block main %}
+<div class="hello">
+    <div class="hellotext">
+        <h3>Здравствуй друг.</h3> 
+        <h4>Это начальная страница нашего статейного сайта</h4>
+    </div>
+    <div class="gotoartsbtn">
+        <a class="btn btn-primary btn-lg" href="{% url 'all_articles' %}" role="button">Читать</a>
+    </div>
+    
+</div>
+
+{% endblock %}

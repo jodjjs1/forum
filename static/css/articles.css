@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.articles {
+    padding-right: 25%;
+    padding-left: 25%;
+}
+
+.card {
+    margin-top: 15px;
+}

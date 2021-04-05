@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %} {{ article.title }} {% endblock %}
+{% block styles %}{% static 'css/article.css' %}{% endblock %}
+
+{% block main %}
+
+
+
+<div class="article">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.text }}</p>
+    <p>Автор: {{ article.autor }}</p>
+</div>
+
+{% endblock %}

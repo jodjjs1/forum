@@ -1,0 +1,23 @@
+nav {
+    background-color: #ffec5b;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    
+    padding-left: 48.5%;
+    padding-right: 50%;
+
+    height: 50px;
+    width: auto;
+
+    background-color: rgb(100, 100, 100);
+}
+
+.footer {
+    margin-top: 12.5px;
+    margin-bottom: 12.5px;
+    height: 25px;
+}
+
