@@ -2,17 +2,32 @@
 {% load static %}
 
 {% block title %} {{ user }} {% endblock %}
-{% block styles %}{% static 'css/profil.css' %}{% endblock %}
+{% block styles %}{% static 'css/articles.css' %}{% endblock %}
 
 {% block main %}
 
 <div class="mainc">
     <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    {% if is_me %}
     <h3>Email: {{ user.email }}</h3>
-    <h3></h3>
-</div>
-<div class="exit">
-    <a href="{% url 'logout' %}">Выход</a>
+
+    <div class="exit">
+        <a href="{% url 'logout' %}">Выход</a>
+    </div>
+    {% endif %}
+
+    <div class="articles">
+        {% for article in articles %}
+            <div class="card">
+                <h5 class="card-header">{{ article.title }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.text }}</h5>
+                    <p class="card-text">Автор: {{ article.autor }}</p>
+                    <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

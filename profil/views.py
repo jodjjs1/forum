@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.contrib.auth.models import User
+from userforum.models import Articles
 
 def profil(request):
     print(request)
@@ -8,4 +9,10 @@ def profil(request):
 
 def show_up(request, userid):
     user = User.objects.get(pk=userid)
-    return render(request, 'profil/profil.html', {'user': request.user})
+    articles = Articles.objects.filter(autor=user)
+    if request.user == user:
+        is_me = True
+    else:
+        is_me = False
+    return render(request, 'profil/profil.html', {'user': request.user, 'articles': articles, 'is_me': is_me})
+

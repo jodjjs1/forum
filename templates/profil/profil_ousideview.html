@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %} {{ user.first_name }} {{ user.last_name }} {% endblock %}
+{% block styles %}{% static 'css/articles.css' %}{% endblock %}
+
+{% block main %}
+
+<div class="mainc">
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <div class="articles">
+    {% for article in articles %}
+        <div class="card">
+            <h5 class="card-header">{{ article.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{ article.text }}</h5>
+                <p class="card-text">Автор: {{ article.autor }}</p>
+                <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</div>
+
+
+{% endblock %}
