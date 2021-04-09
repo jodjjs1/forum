@@ -35,7 +35,7 @@ def add_article(request):
         new_article = Articles(
             title=request.POST['title'],
             text=request.POST['artcl_text'],
-            autor=f'{request.user.first_name} {request.user.last_name}'
+            autor=request.user
         )
         new_article.save()
 
