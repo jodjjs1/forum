@@ -19,10 +19,9 @@
     <div class="articles">
         {% for article in articles %}
             <div class="card">
-                <h5 class="card-header">{{ article.title }}</h5>
+                <h4 class="card-header">{{ article.title }}</h4>
                 <div class="card-body">
                     <h5 class="card-title">{{ article.text }}</h5>
-                    <p class="card-text">Автор: {{ article.autor }}</p>
                     <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
                 </div>
             </div>

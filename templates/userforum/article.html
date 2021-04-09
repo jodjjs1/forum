@@ -11,7 +11,7 @@
 <div class="article">
     <h1>{{ article.title }}</h1>
     <p>{{ article.text }}</p>
-    <p>Автор: <a href="{% url 'up' article.autor.id %}">{{ article.autor }}</a></p>
+    <p>Автор: <a href="{% url 'up' article.autor.id %}">{{ article.autor.first_name }} {{ article.autor.last_name }}</a></p>
     <p>Дата публикации: {{ article.publish_time }}</p>
 </div>
 

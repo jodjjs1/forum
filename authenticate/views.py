@@ -20,8 +20,15 @@ def registr(request):
             
         except User.DoesNotExist:
             user = User.objects.create_user(username=username, email=email, password=password)
-            user.first_name = request.POST["fname"]
-            user.last_name = request.POST['sname']
+
+            fn = request.POST["fname"]
+            fn = fn[0].upper() + fn[1:]
+
+            ln = request.POST['sname']
+            ln = ln[0].upper() + ln[1:]
+
+            user.first_name = fn
+            user.last_name = ln
             user.save()
             login(request, user)
 
