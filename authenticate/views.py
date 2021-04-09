@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from django.db.utils import IntegrityError
@@ -54,5 +54,7 @@ def logining(request):
         else:
             return redirect('login')
 
-
+def logouting(request):
+    logout(request)
+    return redirect('all_articles')
     

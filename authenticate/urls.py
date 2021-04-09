@@ -6,5 +6,6 @@ urlpatterns = [
     path('', lambda r: redirect('login')),
     path('registr', views.registr, name='registr'),
     path('login', views.logining, name='login'),
+    path('logout', views.logouting, name='logout'),
 
 ]
