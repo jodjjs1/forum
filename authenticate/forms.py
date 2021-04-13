@@ -23,7 +23,6 @@ class UserRegData(forms.Form):
 
         return data
 
-
     def clean_password(self):
         data = self.cleaned_data['password']
 
@@ -32,7 +31,6 @@ class UserRegData(forms.Form):
 
         return data
 
-
     def clean_first_name(self):
         data = self.cleaned_data['first_name']
         return data[0].upper() + data[1:].lower()
@@ -40,3 +38,8 @@ class UserRegData(forms.Form):
     def clean_last_name(self):
         data = self.cleaned_data['last_name']
         return data[0].upper() + data[1:].lower()
+
+
+class UserLogData(forms.Form):
+    login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

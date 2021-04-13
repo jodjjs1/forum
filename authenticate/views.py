@@ -1,4 +1,4 @@
-from authenticate.forms import UserRegData
+from authenticate.forms import UserLogData, UserRegData
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
@@ -45,22 +45,27 @@ def logining(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('profil')
-        return render(request, 'authenticate/login.html', {'user': request.user})
+        else:
+            form = UserLogData()
+            return render(request, 'authenticate/login.html', {'user': request.user, 'form': form})
 
     if request.method == 'POST':
-        username = request.POST.get('login', '')
-        password = request.POST.get('password', '')
+        form = UserLogData(request.POST)
 
-        if username == '' or password == '':
-            return redirect('login')
+        if form.is_valid():
+            username = form.cleaned_data['login']
+            password = form.cleaned_data['password']
 
-        user = authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('main')
+            if user is not None:
+                login(request, user)
+                return redirect('main')
+            else:
+                messages.error(request, 'Неверный логин или пароль')
+                return redirect('login')
         else:
-            return redirect('login')
+            return render(request, 'authenticate/login.html', {'user': request.user, 'form': form})
 
 def logouting(request):
     logout(request)
