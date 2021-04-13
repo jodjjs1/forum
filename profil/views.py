@@ -14,5 +14,5 @@ def show_up(request, userid):
         is_me = True
     else:
         is_me = False
-    return render(request, 'profil/profil.html', {'user': request.user, 'articles': articles, 'is_me': is_me})
+    return render(request, 'profil/profil.html', {'user': user, 'articles': articles, 'is_me': is_me})
 
