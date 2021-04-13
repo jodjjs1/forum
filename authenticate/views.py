@@ -1,3 +1,4 @@
+from authenticate.forms import UserRegData
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
@@ -8,37 +9,37 @@ from django.db.utils import IntegrityError
 
 def registr(request):
     if request.method == 'GET':
-        return render(request, 'authenticate/registr.html', {'user': request.user})
+        form = UserRegData()
+        return render(request, 'authenticate/registr.html', {'user': request.user, 'form': form})
 
     if request.method == 'POST':
-        username = request.POST['login']
-        email = request.POST['email']
-        password = request.POST['password']
+        form = UserRegData(request.POST)
 
-        try:
-            user_un = User.objects.get(username=username)
-            
-        except User.DoesNotExist:
-            user = User.objects.create_user(username=username, email=email, password=password)
+        if form.is_valid():
+            username = form.cleaned_data['login']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
 
-            fn = request.POST["fname"]
-            fn = fn[0].upper() + fn[1:]
+            try:
+                user_un = User.objects.get(username=username)
+                
+            except User.DoesNotExist:
+                user = User.objects.create_user(username=username, email=email, password=password)
 
-            ln = request.POST['sname']
-            ln = ln[0].upper() + ln[1:]
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.save()
+                login(request, user)
 
-            user.first_name = fn
-            user.last_name = ln
-            user.save()
-            login(request, user)
-
-            return redirect('all_articles')
-        except IntegrityError:
-            messages.error(request, 'Пользователь с таким именем уже существует')
-            return redirect('registr') # TODO: удаление из поля только существующие значения
+                return redirect('all_articles')
+            except IntegrityError:
+                messages.error(request, 'Пользователь с таким именем уже существует')
+                return redirect('registr') # TODO: удаление из поля только существующие значения
+            else:
+                messages.error(request, 'Пользователь уже существует')
+                return redirect('registr')
         else:
-            messages.error(request, 'Пользователь уже существует')
-            return redirect('registr')
+            return render(request, 'authenticate/registr.html', {'user': request.user, 'form': form})
 
 def logining(request):
     if request.method == 'GET':
