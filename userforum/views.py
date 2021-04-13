@@ -1,3 +1,4 @@
+from userforum.forms import AddArticleForm
 from .models import Articles
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
@@ -27,17 +28,22 @@ def about(request):
 def add_article(request):
     if request.method == 'GET': 
         if request.user.is_authenticated:
-            return render(request, 'userforum/add_article.html', {'user': request.user})
+            form = AddArticleForm()
+            return render(request, 'userforum/add_article.html', {'user': request.user, 'form': form})
         else:
             return redirect('login')
 
     if request.method == 'POST':
-        new_article = Articles(
-            title=request.POST['title'],
-            text=request.POST['artcl_text'],
-            autor=request.user
-        )
-        new_article.save()
+        form = AddArticleForm(request.POST)
+
+        if form.is_valid():
+
+            new_article = Articles(
+                title=form.cleaned_data['title'],
+                text=form.cleaned_data['text'],
+                autor=request.user
+            )
+            new_article.save()
 
         return redirect('show_article', new_article.id)
     

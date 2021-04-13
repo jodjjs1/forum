@@ -10,12 +10,14 @@
         {% csrf_token %}
         <div class="form-group">
         <label for="title">Название статьи</label>
-        <input type="text" class="form-control" name="title" placeholder="Статья 25"> <!-- добавить счётчик статей -->
+        {% comment %} <input type="text" class="form-control" name="title" placeholder="Статья 25"> <!-- добавить счётчик статей --> {% endcomment %}
+        {{ form.title }}
         </div>
     
         <div class="form-group">
-        <label for="artcl_text">Тест статьи</label>
-        <textarea class="form-control" name="artcl_text" rows="15"></textarea>
+        <label for="artcl_text">Текст статьи</label>
+        {% comment %} <textarea class="form-control" name="artcl_text" rows="15"></textarea> {% endcomment %}
+        {{ form.text }}
         </div>
 
         <input type="submit" class="btn btn-primary" value="Опубликовать">
