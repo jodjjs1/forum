@@ -40,5 +40,5 @@ class UserRegData(forms.Form):
 
 
 class UserLogData(forms.Form):
-    login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Логин')
+    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Пароль')
