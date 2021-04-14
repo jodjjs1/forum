@@ -14,34 +14,39 @@
 
 <div class="article">
     <form method="post">
-        {% csrf_token %}
-        <div class="form-row">
-          <div class="col">
-            <label for="fname">Имя</label>
-            {{ form.first_name }}
-          </div>
-          <div class="col">
-            <label for="sname">Фамилия</label>
-            {{ form.last_name }}
-          </div>
-          <div class="col">
-            <label for="login">Логин <br>{{ form.login.errors }}</label>
-            {{ form.login }}
-          </div>
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="col">
+          {{ form.first_name.errors }}
+          {{ form.first_name.label_tag }}
+          {{ form.first_name }}
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Email<br>{{ form.email.errors }}</label>
-            {{ form.email }}
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Пароль<br>{{ form.password.errors }}</label>
-            {{ form.password }}
-          </div>
+        <div class="col">
+          {{ form.last_name.errors }}
+          {{ form.last_name.label_tag }}
+          {{ form.last_name }}
         </div>
-        
-        <button type="submit" class="btn btn-primary">Зарегестрироваться</button>
-      </form>
+        <div class="col">
+          {{ form.login.errors }}
+          {{ form.login.label_tag }}
+          {{ form.login }}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.email.errors }}
+          {{ form.email.label_tag }}
+          {{ form.email }}
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.password.errors }}
+          {{ form.password.label_tag }}
+          {{ form.password }}
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Зарегестрироваться</button>
+    </form>
 </div>
 
 

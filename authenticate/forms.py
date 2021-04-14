@@ -3,14 +3,13 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
 from langdetect import detect
-import chardet
 
 class UserRegData(forms.Form):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Имя')
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Фамилия')
+    login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Логин')
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Email')
+    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Пароль')
 
     def clean_login(self):
         data = self.cleaned_data['login']

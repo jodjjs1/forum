@@ -8,7 +8,7 @@ def profil(request):
     return HttpResponse('profil')
 
 def show_up(request, userid):
-    user = User.objects.get_object_or_404(pk=userid)
+    user = User.objects.get(pk=userid)
     articles = Articles.objects.filter(autor=user)
     if request.user == user:
         is_me = True
