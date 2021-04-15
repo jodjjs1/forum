@@ -3,10 +3,6 @@ from django.http.response import HttpResponse
 from django.contrib.auth.models import User
 from userforum.models import Articles
 
-def profil(request):
-    print(request)
-    return HttpResponse('profil')
-
 def show_up(request, userid):
     user = User.objects.get(pk=userid)
     articles = Articles.objects.filter(autor=user)
