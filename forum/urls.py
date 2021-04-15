@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http.response import HttpResponse
 from django.urls import path, include
 from userforum import views
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path('articles/', include('userforum.urls')),
     path('auth/', include('authenticate.urls')),
     path('profil/', include('profil.urls')),
+    path('test', lambda r: HttpResponse('test'))
 
 ]
