@@ -44,7 +44,7 @@ def registr(request):
 def logining(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            return redirect('profil')
+            return redirect('up', request.user.id)
         else:
             form = UserLogData()
             return render(request, 'authenticate/login.html', {'user': request.user, 'form': form})
@@ -60,7 +60,7 @@ def logining(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('main')
+                return redirect('all_articles')
             else:
                 messages.error(request, 'Неверный логин или пароль')
                 return redirect('login')

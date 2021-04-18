@@ -25,6 +25,5 @@ urlpatterns = [
     path('articles/', include('userforum.urls')),
     path('auth/', include('authenticate.urls')),
     path('profil/', include('profil.urls')),
-    path('test', lambda r: HttpResponse('test'))
 
 ]

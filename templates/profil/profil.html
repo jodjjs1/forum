@@ -7,9 +7,10 @@
 {% block main %}
 
 <div class="mainc">
-    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-    {% if is_me %}
-    <h3>Email: {{ user.email }}</h3>
+    <h2>{{ userp.first_name }} {{ userp.last_name }}</h2>
+
+    {% if user == userp %}
+    <h3>Email: {{ userp.email }}</h3>
 
     <div class="exit">
         <a href="{% url 'logout' %}">Выход</a>
@@ -23,6 +24,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ article.text }}</h5>
                     <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
+                    {% if user == userp %}
+                        <a href="{% url 'edit_article' article.id %}" class="btn btn-success">Редактировать</a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

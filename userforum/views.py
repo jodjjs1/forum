@@ -1,8 +1,9 @@
-from userforum.forms import AddArticleForm
+from userforum.forms import AddArticleForm, EditArticelForm
 from .models import Articles
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from django.contrib import messages
 #from django.template import Template
 
 # Create your views here.
@@ -47,5 +48,28 @@ def add_article(request):
 
         return redirect('show_article', new_article.id)
     
+def edit_article(request, articel_id):
+    try:
+        article = Articles.objects.get(pk=articel_id)
+    except (ValueError, Articles.DoesNotExist):
+        messages.error(request, '404')
+        return render(request, 'error_page.html', {'user': request.user})
 
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            if request.user.id == article.autor.id:
+                form = EditArticelForm(initial={'title': article.title, 'text': article.text})
 
+                return render(request, 'userforum/edit_article.html', {'user': request.user, 'article': article, 'form': form})
+        
+        messages.error(request, 'вы не автор')
+        return redirect('login')
+
+    if request.method == 'POST':
+        form = EditArticelForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data['title']
+            article.text = form.cleaned_data['text']
+            article.save()
+    
+        return redirect('show_article', article.id)
