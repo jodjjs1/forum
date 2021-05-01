@@ -15,6 +15,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ article.text }}</h5>
                 <p class="card-text">Автор: <a href="{% url 'up' article.autor.id %}">{{ article.autor.first_name }} {{ article.autor.last_name }}</a></p>
+                <p class="card-text">{{ article.publish_time }}</p>
                 <a href="{% url 'show_article' article.id %}" class="btn btn-primary">Читать</a>
             </div>
         </div>

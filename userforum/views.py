@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 #from django.template import Template
 
-# Create your views here.
+import datetime
+
 
 def main(request):
 
