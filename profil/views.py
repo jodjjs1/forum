@@ -5,7 +5,7 @@ from userforum.models import Articles
 
 def show_up(request, userid):
     user = User.objects.get(pk=userid)
-    articles = Articles.objects.filter(autor=user)
+    articles = Articles.objects.filter(autor=user).order_by('-publish_time')
     if request.user == user:
         is_me = True
     else:
