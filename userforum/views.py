@@ -77,6 +77,7 @@ def edit_article(request, articel_id):
         if form.is_valid():
             article.title = form.cleaned_data['title']
             article.text = form.cleaned_data['text']
+            article.publish_time = datetime.datetime.now()
             article.save()
     
         return redirect('show_article', article.id)
