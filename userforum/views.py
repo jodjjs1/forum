@@ -22,6 +22,16 @@ def all_articles(request):
 def show_article(request, article_id=1):
     article = Articles.objects.get(id=article_id)
 
+    if request.session.get(f'is_viewed_{article_id}', False):
+        print(f'прочитано {article_id}')
+    else:
+        article.views_count += 1
+        request.session[f'is_viewed_{article_id}'] = True
+        article.save()
+        print(f'ток прочитал {article_id}')
+    
+    
+
     return render(request, 'userforum/article.html', {'article': article, 'user': request.user})
 
 def about(request):
@@ -43,7 +53,8 @@ def add_article(request):
             new_article = Articles(
                 title=form.cleaned_data['title'],
                 text=form.cleaned_data['text'],
-                autor=request.user
+                autor=request.user,
+                views_count = 0
             )
             new_article.save()
 

@@ -13,6 +13,7 @@
     <p>{{ article.text }}</p>
     <p>Автор: <a href="{% url 'up' article.autor.id %}">{{ article.autor.first_name }} {{ article.autor.last_name }}</a></p>
     <p>Дата публикации: {{ article.publish_time }}</p>
+    <p>Просмотров: {{ article.views_count }}</p>
 </div>
 
 {% endblock %}
