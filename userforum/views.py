@@ -8,14 +8,11 @@ from django.contrib import messages
 
 import datetime
 
-
 def main(request):
-
     return render(request, 'main.html', {'user': request.user})
 
 def all_articles(request):
-    articles = Articles.objects.all()
-
+    articles = Articles.objects.all().order_by('-publish_time')
 
     return render(request, 'userforum/articles.html', {'articles': articles, 'user': request.user})
 
@@ -30,8 +27,6 @@ def show_article(request, article_id=1):
         article.save()
         print(f'ток прочитал {article_id}')
     
-    
-
     return render(request, 'userforum/article.html', {'article': article, 'user': request.user})
 
 def about(request):
