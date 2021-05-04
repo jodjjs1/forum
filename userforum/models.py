@@ -6,7 +6,7 @@ class Articles(models.Model):
     text = models.CharField(max_length=1000)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     publish_time = models.DateTimeField(auto_now=False)
-    views_count = models.PositiveIntegerField()
+    views_count = models.PositiveIntegerField(null=True)
 
     def __str__(self):
         return f'{self.title} by {self.autor}'
