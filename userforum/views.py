@@ -49,6 +49,7 @@ def add_article(request):
                 title=form.cleaned_data['title'],
                 text=form.cleaned_data['text'],
                 autor=request.user,
+                # publish_time = datetime.now()
                 views_count = 0
             )
             new_article.save()
